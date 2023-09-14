@@ -53,7 +53,8 @@ def battle(user, target):
 
 def main():        
     user = player(input("Enter your name: "))
-    battle(user, choice(list(enemies.values())))
+    print(f"\nWelcome, {user.name}!")
+    print(f"Your stats are: {user.health} HP, {user.attack} attack, {user.defense} defense.")
 
 
 
