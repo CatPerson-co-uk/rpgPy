@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-import csv, os
+import csv
 
 @dataclass
 class area:
@@ -17,12 +17,10 @@ class area:
     
     
 
-script_dir = os.path.dirname(__file__)
-rel_path = "data/areaData.csv"
-abs_file_path = os.path.join(script_dir, rel_path)
+
 
 areas = {}
-with open(abs_file_path, "r") as f:
+with open("data/areaData.csv", "r") as f:
     reader = csv.reader(f, delimiter=",")
     for row in reader:
         areas[row[0]] = area(*row[0:])
