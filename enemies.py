@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-import csv
+import csv, os
+
 
 @dataclass
 class enemy:
@@ -28,10 +29,13 @@ class enemy:
         print(target)
     
 
+
+script_dir = os.path.dirname(__file__)
+rel_path = "data/enemyData.csv"
+abs_file_path = os.path.join(script_dir, rel_path)
+
 enemies = {}
-with open("enemyData.csv", "r") as f:
+with open(abs_file_path, "r") as f:
     reader = csv.reader(f, delimiter=",", quoting=csv.QUOTE_NONNUMERIC)
     for row in reader:
         enemies[row[0]] = enemy(*row[0:])
-
-print(enemies)

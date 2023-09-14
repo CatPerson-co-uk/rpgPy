@@ -1,7 +1,9 @@
 from dataclasses import dataclass
 from random import choice
+import sys
 
 from enemies import enemies
+from areas import areas
 
 @dataclass
 class player:
@@ -12,6 +14,8 @@ class player:
     defense: int = 0
     level: int = 1
 
+    items: list = None
+
     def __post_init__(self):
         self.maxHealth = self.health
         self.name = self.name.capitalize()
@@ -19,10 +23,24 @@ class player:
     def __str__(self):
         return f"{self.name} has {self.health} HP left."
     
+
+    def adventure(self):
+        pass
+
     def fight(self, target):
         target.health -= self.attack - target.defense
         print(f"{self.name} attacked {target.name} for {self.attack - target.defense} damage!")
         print(target)
+
+    def levelUp(self):
+        healthGain = choice([10, 15, 20])
+        attackGain = choice([1, 2, 3])
+        defenseGain = choice([1, 2, 3])
+        print(f"You leveled up! You gained {healthGain} health, {attackGain} attack, and {defenseGain} defense!")
+        self.health += healthGain
+        self.attack += attackGain
+        self.defense += defenseGain
+        self.level += 1
 
 
 def fight(user, target): 
@@ -55,6 +73,20 @@ def main():
     user = player(input("Enter your name: "))
     print(f"\nWelcome, {user.name}!")
     print(f"Your stats are: {user.health} HP, {user.attack} attack, {user.defense} defense.")
+    print("You are level 1.")
+    print("Good luck!\n")
+
+    action = input("What do you want to do? (Adventure, Quit): ").lower()
+    while action != "quit":
+        if action == "adventure":
+            pass
+        else:
+            print("Invalid action. Try again.")
+        action = input("What do you want to do? (Adventure, Quit): ").lower()
+    print("Thanks for playing!")
+    sys.exit()
+    
+
 
 
 
